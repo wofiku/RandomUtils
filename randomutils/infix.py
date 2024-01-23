@@ -1,5 +1,4 @@
-"""
-Infix with basic presets. Usage:
+"""Infix with basic presets. Usage:
 # 'Hello' | iprint | 'world'
 Read more about typing in Python 3: https://docs.python.org/3/library/typing.html
 """
@@ -45,9 +44,38 @@ except ImportError as _ie_math:
     print(perror(module_name=__name__, error=_ie_math))
 
 
+# ACCESSIBLE
+# Functions in the module
+__template = ['Infix']
+__default_functions = ['iall', 'iany', 'iascii', 'ibreakpoint', 'ibytes', 'icallable', 'idelattr', 'idict',
+                       'ienumerate', 'ifilter', 'iformat', 'ifrozenset', 'igetattr', 'ihasattr', 'iint',
+                       'iisinstance', 'iissubclass', 'iiter', 'imap', 'inext', 'iopen', 'iprint', 'irange', 'iround',
+                       'islice', 'ituple', 'imax', 'imin']
+__basic_operators = ['iplus', 'iminus', 'imultiply', 'idivide', 'imod', 'ipower', 'ifloor_divide']
+__math = ['icomb', 'icopysign', 'ildexp', 'inextafter', 'iperm', 'iremainder', 'isumprod', 'ilog', 'iatan2', 'idist']
+# Make it accessible
+__all__ = __template + __default_functions + __basic_operators + __math
+
+
 # MAIN
 # Template
 class Infix:  # variable_1 | infix_here | variable_2
+    """Template on creating infix class type for further creation of infixes.
+
+Creating a new function:
+1. Using lambda (recommended):
+>>> infix_print: Infix = Infix(lambda var1, var2: print(var1, var2))
+2. Function definition workaround:
+>>> @Infix
+... def infix_print(var1, var2):
+...     Infix(print(var1, var2))
+
+Usage example:
+>>> 'Hello' | infix_print | 'world!'
+Hello world!
+"""
+
+    # MAIN
     def __init__(self, func: callable) -> None:
         self.func = func
 
